@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.example.coolweather.db.City;
 import com.example.coolweather.db.Country;
 import com.example.coolweather.db.Provice;
+import com.example.coolweather.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +31,7 @@ public class Utility {
                     provice.setProvinceName(provinceObject.getString("name"));
                     provice.save();
                 }
-                return false;
+                return true;
             }catch(JSONException e){
                 e.printStackTrace();
             }
@@ -74,11 +76,24 @@ public class Utility {
                     country.setWeatherId(countryObject.getString("weather_id"));
                     country.save();
                 }
+                return true;
             }catch (JSONException e){
                 e.printStackTrace();
             }
         }
-
         return false;
+    }
+
+    public static Weather handleWeatherResponse(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.get(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
