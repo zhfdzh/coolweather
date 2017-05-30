@@ -3,7 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize">
-<!--界面title，中间城市名，右边更新时间-->
+<!--界面title，左边选择切换城市的滑动菜单按钮，中间城市名，右边更新时间-->
+    <Button
+        android:id="@+id/nav_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_back"/>
+
     <TextView
         android:id="@+id/title_city"
         android:layout_width="wrap_content"
